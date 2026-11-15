@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Emporio Brillante | Comprar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>El Emporio Brillante</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="listado_tabla.html">Catálogo</a>
+            <a href="producto.html">Producto</a>
+            <a href="comprar.html">Comprar</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="encuesta.html">Encuesta</a>
+        </nav>
+    </header>
+
+    <main class="compra">
+        <h2>Formulario de compra</h2>
+        <p>Completá tus datos para solicitar el servicio.</p>
+
+        <form>
+            <fieldset>
+                <legend>Datos del cliente</legend>
+
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Acá va el nombre">
+
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" name="direccion" placeholder="Acá va tu dirección">
+
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Acá va tu teléfono">
+
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Y acá tu correo electrónico">
+            </fieldset>
+
+            <fieldset>
+                <legend>Medio de pago</legend>
+
+                <label for="pago">Seleccioná un medio de pago</label>
+                <select id="pago" name="pago">
+                    <option value="">Seleccionar</option>
+                    <option value="efectivo">Efectivo</option>
+                    <option value="transferencia">Transferencia bancaria</option>
+                    <option value="tarjeta">Tarjeta</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>Productos / Servicios</legend>
+                <p>Seleccioná el servicio que querés solicitar:</p>
+
+                <label><input type="checkbox" name="producto" value="pantalla"> Reparación de pantalla - $45.000</label>
+                <label><input type="checkbox" name="producto" value="bateria"> Cambio de batería - $30.000</label>
+                <label><input type="checkbox" name="producto" value="notebook"> Limpieza de notebook - $20.000</label>
+                <label><input type="checkbox" name="producto" value="pc"> Formateo de PC - $25.000</label>
+
+                <label for="cantidad_pantalla">Cantidad - Reparación de pantalla</label>
+                <input type="number" id="cantidad_pantalla" name="cantidad_pantalla" min="0" value="0">
+
+                <label for="cantidad_bateria">Cantidad - Cambio de batería</label>
+                <input type="number" id="cantidad_bateria" name="cantidad_bateria" min="0" value="0">
+
+                <label for="cantidad_notebook">Cantidad - Limpieza de notebook</label>
+                <input type="number" id="cantidad_notebook" name="cantidad_notebook" min="0" value="0">
+
+                <label for="cantidad_pc">Cantidad - Formateo de PC</label>
+                <input type="number" id="cantidad_pc" name="cantidad_pc" min="0" value="0">
+            </fieldset>
+            
+            <fieldset>
+                <legend>Cupón de descuento</legend>
+
+                <label for="cupon">Ingresá tu código de descuento</label>
+                <input type="text" id="cupon" name="cupon" placeholder="Ej: UCP10">
+                <button type="button" id="btnCupon">Validar cupón</button>
+
+                <p id="mensajeCupon"></p>
+            </fieldset>
+
+            <p>Total estimado: $<span id="resultado">0</span></p>
+
+            <button type="submit">Confirmar compra</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>Venta de impresoras</p>
+    </footer>
+
+    <script>
+        const precios = {
+            cantidad_pantalla: 45000,
+            cantidad_bateria: 30000,
+            cantidad_notebook: 20000,
+            cantidad_pc: 25000
+        };
+
+        const resultado = document.getElementById("resultado");
+        const inputsCantidad = Object.keys(precios).map(id => document.getElementById(id));
+
+        function calcularTotal() {
+            let total = 0;
+
+            inputsCantidad.forEach(input => {
+                const cantidad = parseInt(input.value, 10) || 0;
+                const precio = precios[input.id];
+                total += cantidad * precio;
+            });
+
+            resultado.textContent = total.toLocaleString("es-AR");
+        }
+
+        inputsCantidad.forEach(input => {
+            input.addEventListener("input", calcularTotal);
+        });
+
+        document.querySelector("form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            calcularTotal();
+        });
+
+        calcularTotal();
+        function validarCupon() {
+            const inputCupon = document.getElementById("cupon");
+            const mensajeCupon = document.getElementById("mensajeCupon");
+
+            const codigo = inputCupon.value.trim().toUpperCase();
+
+            mensajeCupon.classList.remove("mensaje-error", "mensaje-exito");
+
+            if (codigo === "") {
+                mensajeCupon.textContent = "Por favor, ingrese un código";
+                mensajeCupon.classList.add("mensaje-error");
+            } else if (codigo === "UCP10") {
+                mensajeCupon.textContent = "Cupón aplicadote, tenés un 10% de descuento";
+                mensajeCupon.classList.add("mensaje-exito");
+            } else {
+                mensajeCupon.textContent = "Código inválido o vencido >:(";
+                mensajeCupon.classList.add("mensaje-error");
+            }
+        }
+
+        document.getElementById("btnCupon").addEventListener("click", validarCupon);
+    </script>
+</body>
+</html>
