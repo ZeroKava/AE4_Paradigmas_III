@@ -1,5 +1,5 @@
-<!-- controlador de productos
 <?php
+// controlador de productos
 require __DIR__ . '/../config/http.php'; //require incluye y ejecuta el contenido de otro php
 //__DIR__ devulve la ruta de la carpeta donde se encuentra el archivo actual y ../ sube un nivel en la estructura de carpetas
 require __DIR__ . '/../config/conexion.php'; // . concatena

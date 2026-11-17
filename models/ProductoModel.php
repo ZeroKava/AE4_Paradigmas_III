@@ -1,5 +1,5 @@
-<!-- se comunica con la base de datos para realizar operaciones sobre la tabla productos
 <?php
+//se comunica con la base de datos para realizar operaciones sobre la tabla productos
 class ProductoModel {
     public function __construct(private PDO $db) {}// __construct es el constructor, PDO establece el tipo de dato recibido
 
