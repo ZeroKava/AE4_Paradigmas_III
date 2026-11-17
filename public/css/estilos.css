@@ -1,0 +1,319 @@
+@font-face { /*permite incorporar fuentes externas a la página web*/
+  font-family: "Overseer";
+  src: url("../fuentes/Overseer.otf");
+  font-display: swap; /*esto lo que hace es permitir mostrar una fuente alternativa
+  mientras se descarga la personalizada*/
+}
+@font-face {
+  font-family: "Monofonto";
+  src: url("../fuentes/Monofonto.otf");
+  font-display: swap;
+}
+
+:root { /*selecciona <html>*/
+  --fondo: #041207; /*estas son variables css personalizadas*/
+  --verde: #2bf979;
+  --amarillo: #f2e870;
+  --rojo: #ff4d4d;
+}
+* {
+  margin: 0; /*elimina los margenes externos predeterminados de los elementos*/
+  padding: 0; /*elimina los espacios internos predeterminados*/
+  box-sizing: border-box; /*esta propiedad modifica como se calcula el tamaño de los elementos
+  por defecto css utiliza content-box*/
+}
+[hidden] { /*selecciona todos los elementos que tengan el atributo html hidden*/
+  display: none !important; /*display none elimina visualmente el elemento y el espacio que ocuparía
+  !important obliga a priorizar esta declaración frente a otras de display que entren en conflicto*/
+}
+
+body {
+  font-family: Monofonto, monospace; /*si no se puede cargar monofonto utliza monospace*/
+  background: var(--fondo);
+  color: #fff;
+}
+h2[tabindex="-1"]:focus { /*selecciona todos los encabezados de nivel 2 que tengan tabindex -1
+    y focus selecciona el elemento cuando recibe el foco*/
+  outline: none; /*esto elimina el contorno visual que normalmente aparece cuando el elemento recibe foco*/
+}
+
+/* accesibilidad */
+a:focus-visible, /*mejora la navegación mediante teclado*/
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex="0"]:focus-visible { 
+  outline: 3px solid #fff; /*cuando nos desplazamos entre los botones crea
+  un contorno blanco de 3 pixeles*/
+  outline-offset: 3px; /*separa el contorno 3 pixeles del borde del elemento*/
+}
+
+.oculto { /*esta clase oculta visualmetne un contenido sin eliminarlo del acceso de tecnologías de asistencia*/
+  position: absolute; /*saca el elemento del flujo normal del documento y permite posicionarlo respecto de su contenedor de posicionamiento*/
+  width: 1px;
+  height: 1px;
+  overflow: hidden; /*oculta cualquier contenido que sobresalga de las dimensiones del elemento*/
+  clip: rect(0 0 0 0); /*recorta visualmente el elemento para que no se vea su contenido*/
+  white-space: nowrap; /*evita que el texto se divida en varias líneas*/
+}
+
+header,
+footer {
+  background: var(--fondo);
+  color: var(--verde);
+  text-shadow: 0 0 6px var(--verde); /*agrega resplando al texto*/
+}
+header {
+  display: flex; /*activa flexbox*/
+  flex-wrap: wrap; /*permite que los elementos pasen a otra línea cuando no tienen suficiente espacio horizontal*/
+  gap: 10px; /*una separación de 10px entre elementos hijos*/
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 2px solid var(--verde);
+}
+footer {
+  padding: 30px 20px;
+  text-align: center;
+}
+nav a {
+  color: var(--verde);
+  text-decoration: none; /*elimina el subrayado*/
+  font-size: 18px;
+  margin-left: 20px;
+}
+nav a:hover, /*se activa cuando pasamos el cursor por encima de un enlace*/
+nav a[aria-current="page"] { /*selecciona el enlace que tiene el atributo aria-current="page"*/
+  color: #fff;
+  text-decoration: underline;
+}
+
+a {
+  color: var(--verde);
+}
+.boton,
+button {
+  display: inline-block;
+  background: var(--amarillo);
+  color: #000101;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 20px;
+  font-family: Monofonto, monospace;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+button:disabled { /*selecciona todos los botones deshabilitados*/
+  opacity: 0.6; /*les coloca una opacidad al 60%*/
+  cursor: wait; /*muestra el cursor en espera*/
+}
+
+#estado {
+  max-width: 600px;
+  margin: 20px auto 0;
+}
+.mensaje-error,
+.mensaje-exito {
+  padding: 10px;
+  border: 1px solid;
+}
+.mensaje-error {
+  color: var(--rojo);
+  background: rgba(255, 77, 77, 0.1);
+}
+.mensaje-exito {
+  color: var(--verde);
+  background: rgba(43, 249, 121, 0.1);
+}
+
+.portada {
+  background: url("../imagenes/vault_boy.jpg") center / cover no-repeat; /* que la imagen cubra todo el espacio disponible
+  y no se repita*/
+  text-align: center;
+  padding: 100px 20px;
+}
+.portada h2 {
+  font-family: Overseer, sans-serif;
+  font-size: clamp(32px, 6vw, 60px); /*clamp establece un tamaño adaptable*/
+  margin-bottom: 20px;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+.portada p {
+  font-family: Overseer, sans-serif;
+  font-size: 25px;
+  margin-bottom: 30px;
+  text-shadow:
+    1px 1px 0 #000,
+    -1px -1px 0 #000;
+}
+.bienvenida {
+  color: var(--verde);
+  text-align: center;
+  padding: 100px 20px;
+  border-bottom: 2px solid var(--verde);
+}
+
+.pagina {
+  padding: 60px 8%;
+  text-align: center;
+}
+.pagina h2,
+legend {
+  color: var(--verde);
+  text-shadow: 0 0 6px var(--verde);
+}
+.pagina form {
+  max-width: 600px;
+  margin: 30px auto 0;
+  text-align: left;
+}
+fieldset {
+  border: 2px solid var(--verde);
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+legend {
+  padding: 0 10px;
+  font-size: 18px;
+}
+label {
+  display: block;
+  margin-top: 15px;
+}
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  background: var(--fondo);
+  color: #fff;
+  border: 1px solid var(--verde);
+  font-family: Monofonto, monospace;
+  font-size: 16px;
+}
+input::placeholder,
+textarea::placeholder {
+  color: #8fbf9f;
+}
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--verde);
+  margin: 0;
+}
+form button[type="submit"],
+#btnCupon,
+#btnLogout {
+  margin-top: 20px;
+}
+.total {
+  font-size: 20px;
+  color: var(--verde);
+  margin-top: 10px;
+}
+
+.tabla-scroll {
+  overflow-x: auto;
+  margin-top: 30px;
+}
+table {
+  width: 100%;
+  border: 2px solid var(--verde);
+  border-collapse: collapse;
+}
+caption {
+  padding: 10px;
+  color: var(--verde);
+}
+th,
+td {
+  border: 1px solid var(--verde);
+  padding: 10px;
+}
+th {
+  color: var(--verde);
+}
+td img {
+  max-width: 100px;
+  height: auto;
+}
+td button {
+  margin: 2px;
+  padding: 8px 12px;
+}
+
+.opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.opciones label {
+  flex: 1 1 150px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid #1c8a4a;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.opciones label:has(input:checked) {
+  background: rgba(43, 249, 121, 0.12);
+  border-color: var(--verde);
+}
+fieldset.sin-responder {
+  border-color: var(--rojo);
+}
+fieldset.sin-responder legend {
+  color: var(--rojo);
+  text-shadow: none;
+}
+#contador {
+  margin-top: 8px;
+  text-align: right;
+  color: var(--verde);
+}
+#contador.poco {
+  color: var(--amarillo);
+}
+
+.producto {
+  max-width: 1000px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  text-align: left;
+}
+.producto img {
+  width: min(500px, 100%);
+  height: auto;
+  border-radius: 10px;
+}
+.producto .precio {
+  font-size: 28px;
+  margin: 15px 0;
+}
+.producto p {
+  margin-bottom: 20px;
+}
+@media (min-width: 900px) {
+  .producto {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
