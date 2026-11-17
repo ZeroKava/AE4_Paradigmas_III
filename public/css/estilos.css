@@ -121,7 +121,7 @@ button:disabled { /*selecciona todos los botones deshabilitados*/
 }
 .mensaje-error {
   color: var(--rojo);
-  background: rgba(255, 77, 77, 0.1);
+  background: rgba(255, 77, 77, 0.1); /*define colores con transarencia*/
 }
 .mensaje-exito {
   color: var(--verde);
