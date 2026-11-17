@@ -23,12 +23,12 @@
     <main>
         <p id="estado" aria-live="polite"></p> <!-- interrumpe, amablemente, por ahora está vacío-->
         
-        <section id="v-inicio"> <!-- esto crea una sección temática del documento-->
+        <section id="v-inicio" class="pagina"> <!-- esto crea una sección temática del documento-->
             <div class="portada">
                 <h2 tabindex="-1">Comprá tu próxima gran impresora</h2> <!-- el uso de tabindex -1 es interesante, permite ser utilizado como foco
                 pero no es accesible con tab (normalmente), se accede a él en caso de sección, tmb se puede programar el acceso a este-->
                 <p>Nos fascinan las impresoras, realmente</p>
-                <a class="boton" href="#catalogo"></a>
+                <a class="boton" href="#catalogo">Ver las impresoras</a>
             </div>
             <div class="bienvenidad">
                 <h3>Bienvenidos a nuestra empresa</h3>
@@ -115,7 +115,7 @@
         <section id="v-contacto" class="pagina" hidden>
             <h2 tabindex="-1">Contacto y consultas</h2>
             <p>Contanos que necesitás y te respondemos.</p>
-            <form id="formContato" novalidate> <!-- novalidate lo que hace es apagar la validación de los inputs al ejecutar su envío-->
+            <form id="formContacto" novalidate> <!-- novalidate lo que hace es apagar la validación de los inputs al ejecutar su envío-->
                 <label for="ct-nombre">Nombre completo</label>
                 <input type="text" id="ct-nombre" autocomplete="name">
                 <label for="ct-email">E-mail</label>
