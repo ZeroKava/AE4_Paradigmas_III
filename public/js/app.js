@@ -313,6 +313,23 @@ formulario("#formProducto", async (f) => {
     await listarAdmin();
 });
 
+// registra un nuevo administrador encriptando su clave con BCRYPT en el servidor
+formulario("#formNuevoUsuario", async (f) => {
+    const datos = {
+        usuario: $("#nu-usuario").value.trim(),
+        password: $("#nu-password").value
+    };
+    $("#nu-password").value = "";
+    if (!datos.usuario || datos.password.length < 8) {
+        return aviso("Completá el usuario y una contraseña de al menos 8 caracteres.", "error");
+    }
+    const r = await api(API + "usuarios.php", "POST", datos);
+    if (sesionVencida(r)) return;
+    if (!r.ok) return aviso(r.datos.error || "No se pudo crear el administrador.", "error");
+    aviso(r.datos.mensaje);
+    f.reset();
+});
+
 /* ---------- arranque ---------- */
 window.addEventListener("hashchange", navegar);
 navegar();

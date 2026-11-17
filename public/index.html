@@ -209,6 +209,17 @@
                     </fieldset>
                 </form>
 
+                <form id="formNuevoUsuario" novalidate>
+                    <fieldset>
+                        <legend>Registrar nuevo administrador</legend>
+                        <label for="nu-usuario">Nuevo usuario</label>
+                        <input type="text" id="nu-usuario" maxlength="50" autocomplete="off">
+                        <label for="nu-password">Contraseña (mínimo 8 caracteres)</label>
+                        <input type="password" id="nu-password" autocomplete="new-password">
+                        <button type="submit">Crear administrador</button>
+                    </fieldset>
+                </form>
+
                 <div class="tabla-scroll" role="region" aria-label="Todos los productos" aria-live="polite" tabindex="0">
                 <!--tabla-scroll permite aplicar estilos, role identifica una región de contenido-->
                     <table>
